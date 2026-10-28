@@ -1,0 +1,32 @@
+%%TRACE 1
+%%grammar: F=断言(后面必须至少一条 E)  E=证据(命令/文件/字节数/页码/ledger条目)  I=推断(可错)  U=未知
+%%reinterpret: 本文件不含结论；读者可依证据重新判断，作者不必在场。
+%%end
+F 2026-10-25 | 云端生图/生视频当前免费，但属「阶段性优惠」，随时可能收费
+E ledger 2026-10-25 条目；agnes-ai.cn/zh-Hans/docs/pricing 原文「阶段性优惠的结束时间以平台公告和账户账单为准」
+E FAQ 页写「核心 AI 模型可以无限期免费使用」——与 pricing 页矛盾，取保守值
+F 2026-10-25 | 免费用户的限制是 RPM，不是费用
+E tokenplan 页 RPM 表：免费用户 文本10 / 图1K10 / 图2K5 / 图3K-4K各1 / 视频1（每分钟）
+E 实测 1024x768 生图 7.4s；5 秒视频单任务约 6 分钟
+F 2026-10-25 | 猪八戒诚信保证金可退，需同时满足五条
+E rule.zbj.com/ruleshow-0?pid=148 第十一条：无处理中举报/纠纷、无未偿垫付款、无未结束交易、最后一笔交易完结超 90 天、无未完结会员费用
+E 同页第十二条：按原支付路径退还
+E 同页第16条：芝麻信用授权人与店铺实名一致且通过综合评估可申请免缴，最长 360 天
+F 2026-10-25 | 桌面版 DSH 无法安装需要 @deepseek-ai/* 宿主 peer 的插件
+E 检查 %USERPROFILE%\.dsh\profiles\desktop\node_modules\@deepseek-ai：cordis / dsh-tools / dsh-tool-web 等 6 个全部缺失
+E 宿主包在 Programs\DeepSeek Harness\resources\app.asar（174.3 MB）内，非可安装依赖
+E 对照：dsh-video-studio、bili-vision 零 peer，安装成功
+F 2026-10-27 | 云端 vLLM 服务 Qwen3-32B-AWQ，28672 上下文，RTX 4090 D 24GB
+E sshbot 探测：nvidia-smi RTX 4090 D 24564 MiB；/v1/models 返回 Qwen3-32B max_model_len=28672
+E 隧道 18000→8000 后本机对话成功，实测 22+15 tokens
+F 2026-10-27 | 32B 模型是合格「打字员」，不是「编辑」
+E 20 物种知识卡：格式 20/20 一次过、40 秒；人工抽检 4 条中 2 条内容错（小麦缺抽穗、兔子阶段重复）
+E 加时序约束后 10/10 但 10 条完全雷同；再加差异化校验（每物种必需节点+全局唯一）后 10/10 且各不相同
+F 2026-10-28 | 判单脚本的形态判定是关键词匹配，能覆盖已知样本，换措辞会漏
+E regress.py dev 15/15、holdout 5/5；首次跑抓到 2 条基线标签写错（201339 html→webapp、815434 html→pdf）
+E pipeline.py 274 行，规则以模块级常量硬编码（FORMS / BLOCKERS / FLEX）
+F 2026-10-28 | 守夜进程曾因「源异常也响铃」每 60 秒响一次
+E watch.log 相邻两条告警 09:20:26 / 09:21:26；修复后 --once 0.2s 返回（Beep 会阻塞 400ms）
+U 企业微信在 10-25 之后是否有新的派单高峰；本机库在未运行时无法判断
+U 云端模型能否稳定承担「批量内容生产」；样本仅 20 条、单一领域
+I 若把「断言+证据」当默认写法，错误会更容易被发现；但无法证明它比结论式写法更少出错

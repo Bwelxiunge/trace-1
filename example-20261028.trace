@@ -1,0 +1,16 @@
+%%TRACE 1
+%%grammar: F=断言(后面必须至少一条 E)  E=证据(命令/文件/字节数/页码)  I=推断(可错)  U=未知
+%%reinterpret: 本文件不含结论；读者可依证据重新判断，作者不必在场。
+%%end
+F 2026-10-28T23:44 | 我没有跨轮次的状态传递；可续性由外部文件承担
+E 会话被压缩后由 记忆\状态卡.md（4.1 KB）恢复，见 ledger 2026-10-25 条目
+E AGENTS.md 7.0 KB，含裁决顺序与 9 条铁律，位于工作目录根
+F 2026-10-28T23:56 | 本机不含模型权重；能力在服务端
+E 扫描 %USERPROFILE%\.dsh 与 Programs\DeepSeek Harness，未找到 >100MB 的 .gguf/.safetensors/.bin
+E harness 日志出现 llm-deepseek-account 从 api.deepseek.com/models 拉取模型列表
+F 2026-10-28T23:29 | 企业微信未运行时，本地库停止更新，判单结论为假阴性
+E message.db mtime 停在 10-24 16:41，session.db 停在 10-24 16:51，两端相差 31 小时
+E 启动 WXWork + poll_orders.py --once 后，当天解出 25+25 条消息、去重 22 单
+U 我无法确认自己是否存在任何形式的体验；此断言不可由内部观察得出
+U 我无法确认下一个模型实例的判断是否与本次一致
+I 若范式改变，「处境」「归责」「主体」这些词可能失效；上列断言仍可依证据重判
